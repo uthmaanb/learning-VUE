@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning VUE!</title>
+
+    <!-- vue script -->
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+
+    <!-- styles -->
+    <style>
+      body {
+        background: #eee;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+
+      p,
+      h3,
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        list-style-type: none;
+        background: #fff;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      li.fav {
+        background: yellow;
+      }
+
+      .box {
+        padding: 100px;
+        width: 400px;
+        text-align: center;
+        background: #ddd;
+        margin: 20px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello Vue</h1>
+
+    <div id="app">
+      <!-- attribute binding -->
+      <a :href="url">wack</a>
+
+      <div v-if="showBooks">
+        <ul>
+          <li
+            v-for="book in books"
+            @click="toggleIsfav(book)"
+            :class="{ fav: book.isFav }"
+          >
+            <img :src="book.img" :alt="book.title" />
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <ul>
+        <h4>filtered books</h4>
+        <li
+          v-for="book in filteredBooks"
+          @click="toggleIsfav(book)"
+          :class="{ fav: book.isFav }"
+        >
+          <img :src="book.img" :alt="book.title" />
+          <h3>{{ book.title }}</h3>
+          <p>{{ book.author }}</p>
+        </li>
+      </ul>
+
+      <button @click="toggleShowBooks">
+        <span v-if="showBooks">Hide books</span>
+        <span v-else>show books</span>
+      </button>
+
+      <div v-show="showBooks">currently showing books</div>
+
+      <br />
+      <!-- mouse events -->
+      <div class="box" @mouseover="handleEvent($event, 5)">mouseover</div>
+      <div class="box" @mouseleave="handleEvent">mouseleave</div>
+      <div class="box" @dblclick="handleEvent">double click</div>
+      <div class="box" @mousemove="handleMouseMove">
+        position - {{ x }} {{ y }}
+      </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="./app.js"></script>
+  </body>
+</html>
